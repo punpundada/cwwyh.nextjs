@@ -8,18 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+      // backgroundImage: {
+      //   "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      //   "gradient-conic":
+      //     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      // },
       colors: {
         app: {
-          text: "#08172b",
-          background: "#f2f7fd",
-          primary: "#d99236",
-          secondary: "#b5ceee",
-          accent: "#b47522",
+          text: "#000000",
+          background: "#fbfcfe",
+          primary: "#7489d8",
+          secondary: "#b3bfea",
+          accent: "#2e47a3",
         },
         darkApp: {
           text: "#f2f7fd",
