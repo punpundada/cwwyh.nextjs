@@ -2,8 +2,8 @@ import Navbar from '@/components/Navbar'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -19,9 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className='bg-app-background h-screen'>
+        
         <Navbar/>
         {
-        children
+          <div className='relative top-20'>
+            <ToastContainer />
+           {children}
+          </div>
         }
         </body>
     </html>
