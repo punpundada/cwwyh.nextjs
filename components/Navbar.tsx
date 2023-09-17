@@ -1,29 +1,37 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo2 from "@/images/LOGO2.png";
 import Link from "next/link";
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 const Navbar = () => {
   const [prevScroll, setPrevScrool] = useState(window.scrollY);
+  const[token,setToken]=useState(sessionStorage.getItem("token") || "")
   const router = useRouter();
 
-  window.addEventListener("scroll", () => {
-    debugger;
-    const navbar = document.getElementById("nav");
-    let currentScrollPos = window.scrollY;
-    if (navbar) {
-      if (currentScrollPos > prevScroll) {
-        navbar.style.transform = `translateY(-105%)`;
-      } else {
-        navbar.style.transform = `translateY(0%)`;
-      }
-      setPrevScrool(currentScrollPos);
-    }
-  });
 
-  const { user } = JSON.parse(sessionStorage.getItem("user") || "{}");
+  useEffect(()=>{
+    window.addEventListener("scroll", () => {
+      const navbar = document.getElementById("nav");
+      let currentScrollPos = window.scrollY;
+      if (navbar) {
+        if (currentScrollPos > prevScroll) {
+          navbar.style.transform = `translateY(-105%)`;
+        } else {
+          navbar.style.transform = `translateY(0%)`;
+        }
+        setPrevScrool(currentScrollPos);
+      }
+    });
+  },[prevScroll])
+
+  useEffect(()=>{
+    const updatedToken = sessionStorage.getItem('token') || ''
+    setToken(updatedToken)
+  },[token])
+
+  
 
   return (
     <nav
@@ -32,7 +40,7 @@ const Navbar = () => {
     >
       <div className="flex ms-8">
         <Image
-          className=""
+          // className="logo"
           src={logo2}
           alt="LOGO"
           width={160}
@@ -55,12 +63,13 @@ const Navbar = () => {
           Blog
         </Link>
         <div className="border border-darkApp-background h-9"></div>
-        {user ? (
+        {token.length !== 0 ? (
           <Button
           variant="contained"
             className="bg-app-primary hover:bg-slate-500"
             onClick={() => {
-              sessionStorage.removeItem('user')
+              sessionStorage.removeItem('token')
+              setToken('');
               router.push("/")
             }}
           >
@@ -75,13 +84,6 @@ const Navbar = () => {
             Login
           </Button>
         )}
-        <Button
-          variant="contained"
-          className="bg-app-primary hover:bg-slate-500"
-          onClick={() => router.push("/login")}
-        >
-          Login
-        </Button>
       </div>
     </nav>
   );
