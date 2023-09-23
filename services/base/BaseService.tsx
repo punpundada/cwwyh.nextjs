@@ -7,8 +7,8 @@ export const createBaseService = (): AxiosInstance => {
   
     // Define headers as an object
     const headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      // 'Content-Type': 'application/json',
+      // 'Accept': 'application/json',
       'Authorization': `Bearer ${token}`
     };
   
