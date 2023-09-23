@@ -5,7 +5,7 @@ import { Controller } from 'react-hook-form'
 
 
 
-const InputController = ({control,name,label}:IInputControllerProp) => {
+const InputController = ({control,name,label,disabled}:IInputControllerProp) => {
   return (
     <Controller
         name={name}
@@ -22,6 +22,7 @@ const InputController = ({control,name,label}:IInputControllerProp) => {
                 error={!!error}
                 size='small'
                 className=''
+                disabled={disabled}
                 />
                 {
                     error !== undefined 

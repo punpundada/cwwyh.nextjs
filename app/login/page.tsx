@@ -11,7 +11,12 @@ import { Button, Paper } from "@mui/material";
 import { LoginService } from "@/services/LoginServices";
 import { IResponce } from "@/types/IResponce";
 import { ToastContainer, toast } from 'react-toastify';
+import Link from "next/link";
+
+
+
 const LoginPage = () => {
+
   const schema = yup.object({
     email: yup
       .string()
@@ -25,6 +30,7 @@ const LoginPage = () => {
       email: "",
       password: "",
     },
+    resolver:yupResolver(schema)
   });
 
   const submitHandler = async (data:ILoginProp)=>{
@@ -69,6 +75,9 @@ const LoginPage = () => {
             <div className="flex relative justify-end">
               <Button type="submit" variant="contained">Login</Button>
             </div>
+          <h6>Do not have an account? 
+            <Link href={'/signup'} className="text-app-accent hover:text-app-primary" >  Signup</Link>
+          </h6>
           </div>
         </Paper>
       </form>

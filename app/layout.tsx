@@ -22,7 +22,7 @@ export default function RootLayout({
         
         <Navbar/>
         {
-          <div className='relative top-20'>
+          <div className=''>
             <ToastContainer />
            {children}
           </div>
