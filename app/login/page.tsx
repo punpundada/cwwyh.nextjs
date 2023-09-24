@@ -12,6 +12,7 @@ import { LoginService } from "@/services/LoginServices";
 import { IResponce } from "@/types/IResponce";
 import { ToastContainer, toast } from 'react-toastify';
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 
@@ -25,7 +26,9 @@ const LoginPage = () => {
     password: yup.string().min(6).max(25).required("Password is required"),
   });
 
-  const { control, handleSubmit } = useForm<ILoginProp>({
+  const router = useRouter();
+
+  const { control, handleSubmit ,formState:{isSubmitting} } = useForm<ILoginProp>({
     defaultValues: {
       email: "",
       password: "",
@@ -39,7 +42,8 @@ const LoginPage = () => {
       if(result.isSuccess){
         sessionStorage.setItem('token',result.data.accessToken);
         toast.success(result.data.message);
-      }
+        router.push('/')
+            }
       else{
         toast.error(result.data.message)
       }
@@ -73,7 +77,7 @@ const LoginPage = () => {
 
             </div>
             <div className="flex relative justify-end">
-              <Button type="submit" variant="contained">Login</Button>
+              <Button type="submit" variant="contained" disabled={isSubmitting} >Login</Button>
             </div>
           <h6>Do not have an account? 
             <Link href={'/signup'} className="text-app-accent hover:text-app-primary" >  Signup</Link>
