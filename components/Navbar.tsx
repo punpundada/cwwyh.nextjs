@@ -9,12 +9,11 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
 const Navbar = () => {
-  const [prevScroll, setPrevScrool] = useState<number | null >(null);
-  const[token,setToken]=useState("")
+  const [prevScroll, setPrevScrool] = useState<number | null>(null);
+  const [token, setToken] = useState("");
   const router = useRouter();
 
   gsap.registerPlugin(ScrollTrigger);
-
 
   // useEffect(()=>{
   //   setPrevScrool(window.scrollY)
@@ -35,36 +34,28 @@ const Navbar = () => {
   //   });
   // },[prevScroll])
 
-  useEffect(()=>{
-    let tl =gsap.timeline();
-    tl.from('#img',{
-      y:-100,
-      opacity:0,
-    })
+  useEffect(() => {
+    let tl = gsap.timeline();
+    tl.from("#img", {
+      y: -100,
+      opacity: 0,
+    });
 
-    tl.from('#links',{
-      y:-100,
-      opacity:0,
-    })
+    tl.from("#links", {
+      y: -100,
+      opacity: 0,
+    });
+  }, []);
 
-
-
-  },[])
-
-
-
-
-  useEffect(()=>{
-    const updatedToken = sessionStorage.getItem('token') || ''
-    setToken(updatedToken)
-  },[token])
-
-  
+  useEffect(() => {
+    const updatedToken = sessionStorage.getItem("token") || "";
+    setToken(updatedToken);
+  }, [token]);
 
   return (
     <nav
       id="nav"
-      className="navbar  top-0 left-0  transition-transform duration-500 ease-in-out w-screen   bg-app-secondary h-20 flex justify-between items-center text-2xl font-semibold "
+      className=" navbar  top-0 left-0  transition-transform duration-500 ease-in-out w-screen   bg-app-secondary h-20 flex justify-between items-center text-2xl font-semibold "
     >
       <div className="flex ms-8">
         <Image
@@ -78,7 +69,7 @@ const Navbar = () => {
         />
         <h1>CWWYH</h1>
       </div>
-      <div id='links' className="flex gap-14 me-10">
+      <div id="links" className="flex gap-14 me-10">
         <Link href={"/"} className="hover:text-blue-800">
           Home
         </Link>
@@ -94,12 +85,12 @@ const Navbar = () => {
         <div className="border border-darkApp-background h-9"></div>
         {token.length !== 0 ? (
           <Button
-          variant="contained"
+            variant="contained"
             className="bg-app-primary hover:bg-slate-500"
             onClick={() => {
-              sessionStorage.removeItem('token')
-              setToken('');
-              router.push("/")
+              sessionStorage.removeItem("token");
+              setToken("");
+              router.push("/");
             }}
           >
             logout
