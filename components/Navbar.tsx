@@ -7,12 +7,11 @@ import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import useToken from "@/services/useToken";
 
 const Navbar = () => {
-  const [prevScroll, setPrevScrool] = useState<number | null>(null);
-  const [token, setToken] = useState("");
   const router = useRouter();
-
+  const [token,setToken]=useState<null | string>(null)
   gsap.registerPlugin(ScrollTrigger);
 
   // useEffect(()=>{
@@ -47,10 +46,10 @@ const Navbar = () => {
     });
   }, []);
 
-  useEffect(() => {
-    const updatedToken = sessionStorage.getItem("token") || "";
-    setToken(updatedToken);
-  }, [token]);
+  // setToken(useToken);
+  useEffect(()=>{
+    setToken(useToken)
+  },[])
 
   return (
     <nav
@@ -83,7 +82,7 @@ const Navbar = () => {
           Blog
         </Link>
         <div className="border border-darkApp-background h-9"></div>
-        {token.length !== 0 ? (
+        {token ? (
           <Button
             variant="contained"
             className="bg-app-primary hover:bg-slate-500"

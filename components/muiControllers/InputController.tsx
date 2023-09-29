@@ -5,12 +5,12 @@ import { Controller } from 'react-hook-form'
 
 
 
-const InputController = ({control,name,label,disabled}:IInputControllerProp) => {
+const InputController = ({control,name,label,disabled,type}:IInputControllerProp) => {
   return (
     <Controller
         name={name}
          control={control}
-         render={({ field, formState:{errors},fieldState:{error} }) => {
+         render={({ field,fieldState:{error} }) => {
             return (
                 <>
                 <TextField
@@ -23,16 +23,9 @@ const InputController = ({control,name,label,disabled}:IInputControllerProp) => 
                 size='small'
                 className=''
                 disabled={disabled}
+                type={type ? type : 'text'}
+                helperText={error?.message}
                 />
-                {
-                    error !== undefined 
-                        &&
-                        (
-                            <FormHelperText>
-                                {error?.message}
-                            </FormHelperText>
-                        )
-                }
                 </>
                 )
             }}
