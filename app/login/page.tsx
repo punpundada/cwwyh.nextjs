@@ -1,7 +1,5 @@
 "use client";
-import Image from "next/image";
 import React from "react";
-import sideImage from "@/images/WebsiteImages/pexels-jonathan-meyer-752503.jpg";
 import { useForm } from "react-hook-form";
 import { ILoginProp } from "@/types/ILogin";
 import InputController from "@/components/muiControllers/InputController";
@@ -10,7 +8,7 @@ import * as yup from "yup";
 import { Button, Paper } from "@mui/material";
 import { LoginService } from "@/services/LoginServices";
 import { IResponce } from "@/types/IResponce";
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -42,7 +40,7 @@ const LoginPage = () => {
       if(result.isSuccess){
         sessionStorage.setItem('token',result.data.accessToken);
         toast.success(result.data.message);
-        router.push('/')
+        router.push('/recipe')
             }
       else{
         toast.error(result.data.message)
@@ -73,11 +71,12 @@ const LoginPage = () => {
                 control={control}
                 name={"password"} 
                 label="Password"
+                type="password"
               />
 
             </div>
             <div className="flex relative justify-end">
-              <Button type="submit" variant="contained" disabled={isSubmitting} >Login</Button>
+              <Button color="primary" type="submit" variant="contained" disabled={isSubmitting} >Login</Button>
             </div>
           <h6>Do not have an account? 
             <Link href={'/signup'} className="text-app-accent hover:text-app-primary" >  Signup</Link>

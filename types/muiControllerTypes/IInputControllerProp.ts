@@ -3,4 +3,5 @@ export interface IInputControllerProp    {
     label:string,
     control:any,
     disabled?:boolean,
+    type?:string
 };

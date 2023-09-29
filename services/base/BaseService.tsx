@@ -1,15 +1,13 @@
 import axios, { AxiosInstance } from "axios";
+import useToken from "../useToken";
 
 
 export const createBaseService = (): AxiosInstance => {
-    const token = sessionStorage.getItem('token') || '';
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   
     // Define headers as an object
     const headers = {
-      // 'Content-Type': 'application/json',
-      // 'Accept': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${useToken}`
     };
   
     const axiosInstance = axios.create({
