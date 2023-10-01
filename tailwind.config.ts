@@ -8,11 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // backgroundImage: {
-      //   "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-      //   "gradient-conic":
-      //     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      // },
+      screens: {
+        xs: "360px",   // Example: Extra small
+        sm: "640px",   // Example: Small
+        md: "768px",   // Example: Medium
+        lg: "1024px",  // Example: Large
+        xl: "1280px",  // Example: Extra large
+        '2xl': "1536px", // Example: 2x Extra large
+      },
       colors: {
         app: {
           text: "#000000",

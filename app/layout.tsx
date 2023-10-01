@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
@@ -20,15 +20,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-app-background h-screen">
-        <Navbar />
-        {
-          <div className="">
-            <ToastContainer />
-            <Provider store={Store}>{children}</Provider>
-          </div>
-        }
-      </body>
+      <Provider store={Store}>
+        <body className="bg-app-background h-screen">
+          <Navbar />
+          {
+            <div className="h-[90%]">
+              <ToastContainer />
+              {children}
+            </div>
+          }
+        </body>
+      </Provider>
     </html>
   );
 }

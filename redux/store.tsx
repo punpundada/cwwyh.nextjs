@@ -1,9 +1,11 @@
 import { RecipeReducer } from './recipe/RecipeSlice';
 import {configureStore} from '@reduxjs/toolkit'
+import { TokenReducer } from './token/TokenSlice';
 
 export const Store = configureStore({
     reducer:{
-        Recipe:RecipeReducer
+        Recipe:RecipeReducer,
+        Token:TokenReducer,
     }
 });
 

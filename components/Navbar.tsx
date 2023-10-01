@@ -7,33 +7,21 @@ import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
-import useToken from "@/services/useToken";
-
+import {useDispatch,useSelector} from 'react-redux'
+import {removeToken,setToken} from '@/redux/token/TokenSlice';
+import { RootState } from "@/redux/store";
 const Navbar = () => {
   const router = useRouter();
-  const [token,setToken]=useState<null | string>(null)
   gsap.registerPlugin(ScrollTrigger);
 
-  // useEffect(()=>{
-  //   setPrevScrool(window.scrollY)
-  // },[])
+  const dispatch = useDispatch();
 
-  // useEffect(()=>{
-  //   window.addEventListener("scroll", () => {
-  //     const navbar = document.getElementById("nav");
-  //     let currentScrollPos = window.scrollY;
-  //     if (navbar && prevScroll !== null ) {
-  //       if (currentScrollPos > prevScroll) {
-  //         navbar.style.transform = `translateY(-105%)`;
-  //       } else {
-  //         navbar.style.transform = `translateY(0%)`;
-  //       }
-  //       setPrevScrool(currentScrollPos);
-  //     }
-  //   });
-  // },[prevScroll])
+
+  const TokenObject = useSelector((state:RootState)=>state.Token)
+
 
   useEffect(() => {
+    dispatch(setToken())
     let tl = gsap.timeline();
     tl.from("#img", {
       y: -100,
@@ -46,15 +34,10 @@ const Navbar = () => {
     });
   }, []);
 
-  // setToken(useToken);
-  useEffect(()=>{
-    setToken(useToken)
-  },[])
-
   return (
     <nav
       id="nav"
-      className=" navbar  top-0 left-0  transition-transform duration-500 ease-in-out w-screen   bg-app-secondary h-20 flex justify-between items-center text-2xl font-semibold "
+      className=" navbar  top-0 left-0  transition-transform duration-500 ease-in-out w-screen   bg-app-secondary h-[10%] flex justify-between items-center text-2xl font-semibold "
     >
       <div className="flex ms-8">
         <Image
@@ -82,13 +65,12 @@ const Navbar = () => {
           Blog
         </Link>
         <div className="border border-darkApp-background h-9"></div>
-        {token ? (
+        {TokenObject.token ? (
           <Button
             variant="contained"
             className="bg-app-primary hover:bg-slate-500"
             onClick={() => {
-              sessionStorage.removeItem("token");
-              setToken("");
+              dispatch(removeToken())
               router.push("/");
             }}
           >
