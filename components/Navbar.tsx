@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
-import useToken from "@/services/useToken";
+import useToken from "@/services/TokenProvider";
 
 const Navbar = () => {
   const router = useRouter();
