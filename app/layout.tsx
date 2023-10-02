@@ -1,9 +1,13 @@
+'use client'
 import Navbar from '@/components/Navbar'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import { ReactQueryDevtools } from 'react-query/devtools'
+import {QueryClientProvider, QueryClient} from 'react-query'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,17 +20,22 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const queryClient =new  QueryClient();
   return (
     <html lang="en">
       <body className='bg-app-background h-screen'>
+        <QueryClientProvider client={queryClient} >
+          
         
         <Navbar/>
         {
           <div className=''>
             <ToastContainer />
            {children}
+           <ReactQueryDevtools position='bottom-right' />
           </div>
         }
+        </QueryClientProvider >
         </body>
     </html>
   )
