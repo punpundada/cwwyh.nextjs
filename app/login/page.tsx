@@ -33,16 +33,13 @@ const LoginPage = () => {
   });
 
   const { isLoading,mutateAsync } = useLoginData();
-  
-  const SubmitHandler = (formData: ILoginProp) => {
+  const SubmitHandler = async(formData: ILoginProp) => {
     try {
-      mutateAsync(formData);
+       await mutateAsync(formData);
       router.push("/recipe");
     } catch (error) {
       console.log(error)
     }
-
- 
   };
 
   return (

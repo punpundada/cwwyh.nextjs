@@ -14,32 +14,32 @@ export default function Home() {
   const router = useRouter();
   gsap.registerPlugin(ScrollTrigger);
 
-  useEffect(() => {
-    let tl = gsap.timeline({});
-    tl.from(".foodImg", {
-      scale: 0,
-      opacity: 0,
-    });
-    tl.from("#mainH1 ,#p1, #p2 ", {
-      x: 200,
-      opacity: 0,
-      stagger: 0.2,
-    });
+  // useEffect(() => {
+  //   let tl = gsap.timeline({});
+  //   tl.from(".foodImg", {
+  //     scale: 0,
+  //     opacity: 0,
+  //   });
+  //   tl.from("#mainH1 ,#p1, #p2 ", {
+  //     x: 200,
+  //     opacity: 0,
+  //     stagger: 0.2,
+  //   });
 
-    let page2Tl = gsap.timeline();
+  //   let page2Tl = gsap.timeline();
 
-    page2Tl.from(".page2 h1 , .page2 p ", {
-      x: -100,
-      opacity: 0,
-      stagger: 0.2,
-    });
+  //   page2Tl.from(".page2 h1 , .page2 p ", {
+  //     x: -100,
+  //     opacity: 0,
+  //     stagger: 0.2,
+  //   });
 
-    page2Tl.from(".page2img", {
-      x: 200,
-      rotate: 3,
-      opacity: 0,
-    });
-  }, []);
+  //   page2Tl.from(".page2img", {
+  //     x: 200,
+  //     rotate: 3,
+  //     opacity: 0,
+  //   });
+  // }, []);
 
   return (
     <>

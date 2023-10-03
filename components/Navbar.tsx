@@ -33,18 +33,18 @@ const Navbar = () => {
   //   });
   // },[prevScroll])
 
-  useEffect(() => {
-    let tl = gsap.timeline();
-    tl.from("#img", {
-      y: -100,
-      opacity: 0,
-    });
+  // useEffect(() => {
+  //   let tl = gsap.timeline();
+  //   tl.from("#img", {
+  //     y: -100,
+  //     opacity: 0,
+  //   });
 
-    tl.from("#links", {
-      y: -100,
-      opacity: 0,
-    });
-  }, []);
+  //   tl.from("#links", {
+  //     y: -100,
+  //     opacity: 0,
+  //   });
+  // }, []);
 
   // setToken(useToken);
   useEffect(()=>{
