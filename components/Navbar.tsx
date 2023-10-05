@@ -1,110 +1,134 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import logo2 from "@/images/LOGO2.png";
+import navImage from '@/images/NavbarLogo3.png.png'
 import Link from "next/link";
-import { Button } from "@mui/material";
+import {
+  Button,
+  Drawer,
+  Grid,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useRouter } from "next/navigation";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import useToken from "@/services/TokenProvider";
+import MenuIcon from "@mui/icons-material/Menu";
+import { navLinks } from "@/json/navbarItems";
 
 const Navbar = () => {
+  const theme = useTheme();
   const router = useRouter();
-  const [token,setToken]=useState<null | string>(null)
-  gsap.registerPlugin(ScrollTrigger);
+  const [token, setToken] = useState<null | string>(null);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
-  // useEffect(()=>{
-  //   setPrevScrool(window.scrollY)
-  // },[])
-
-  // useEffect(()=>{
-  //   window.addEventListener("scroll", () => {
-  //     const navbar = document.getElementById("nav");
-  //     let currentScrollPos = window.scrollY;
-  //     if (navbar && prevScroll !== null ) {
-  //       if (currentScrollPos > prevScroll) {
-  //         navbar.style.transform = `translateY(-105%)`;
-  //       } else {
-  //         navbar.style.transform = `translateY(0%)`;
-  //       }
-  //       setPrevScrool(currentScrollPos);
-  //     }
-  //   });
-  // },[prevScroll])
-
-  // useEffect(() => {
-  //   let tl = gsap.timeline();
-  //   tl.from("#img", {
-  //     y: -100,
-  //     opacity: 0,
-  //   });
-
-  //   tl.from("#links", {
-  //     y: -100,
-  //     opacity: 0,
-  //   });
-  // }, []);
-
-  // setToken(useToken);
-  useEffect(()=>{
-    setToken(useToken)
-  },[])
+  useEffect(() => {
+    setToken(useToken);
+  }, []);
 
   return (
-    <nav
-      id="nav"
-      className=" navbar  top-0 left-0  transition-transform duration-500 ease-in-out w-screen   bg-app-secondary h-20 flex justify-between items-center text-2xl font-semibold "
+    <Grid
+      container
+      justifyContent={"space-between"}
+      height={"10%"}
+      direction={"row"}
+      alignItems={"center"}
+      padding={3}
+      fontSize={"20px"}
+      // fontWeight={5}
+      className="font-semibold bg-app-secondary text-2xl"
+      item
+      sm={12}
+      md={12}
     >
-      <div className="flex ms-8">
-        <Image
-          // className="logo"
-          id="img"
-          src={logo2}
-          alt="LOGO"
-          width={160}
-          height={160}
-          loading="lazy"
-        />
-        <h1>CWWYH</h1>
-      </div>
-      <div id="links" className="flex gap-14 me-10">
-        <Link href={"/"} className="hover:text-blue-800">
-          Home
-        </Link>
-        <Link href={"/about"} className="hover:text-blue-800">
-          About
-        </Link>
-        <Link href={"/contact"} className="hover:text-blue-800">
-          Contact
-        </Link>
-        <Link href={"/blog"} className="hover:text-blue-800">
-          Blog
-        </Link>
-        <div className="border border-darkApp-background h-9"></div>
-        {token ? (
-          <Button
-            variant="contained"
-            className="bg-app-primary hover:bg-slate-500"
-            onClick={() => {
-              sessionStorage.removeItem("token");
-              setToken("");
-              router.push("/");
-            }}
-          >
-            logout
-          </Button>
-        ) : (
-          <Button
-            variant="contained"
-            className="bg-app-primary hover:bg-slate-500"
-            onClick={() => router.push("/login")}
-          >
-            Login
-          </Button>
-        )}
-      </div>
-    </nav>
+      <Grid item>
+        <Grid container>
+          {isSmall && (
+            <Grid item onClick={() => setOpenDrawer(!openDrawer)}>
+              <MenuIcon />
+              <>
+                <Drawer
+                  open={openDrawer}
+                  onClose={() => setOpenDrawer(openDrawer)}
+                  PaperProps={{
+                    sx:{width:'45%'}
+                  }}
+                >
+                  <List>
+                    {navLinks.map((navlink) => (
+                      <ListItemButton key={navlink.id}>
+                        <ListItemIcon>
+                          <ListItemText> {navlink.link} </ListItemText>
+                        </ListItemIcon>
+                      </ListItemButton>
+                    ))}
+                  </List>
+                </Drawer>
+              </>
+            </Grid>
+          )}
+          <Grid item>
+            {/* <Image src={navImage} alt="NAVIMAGE" width={50} height={40} /> */}
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Grid container direction={"row"} item gap={6} xs={12}>
+          {!isSmall && (
+            <>
+              <Grid>
+                <Link href={"/"} className="hover:text-blue-800">
+                  Home
+                </Link>
+              </Grid>
+              <Grid>
+                <Link href={"/about"} className="hover:text-blue-800">
+                  About
+                </Link>
+              </Grid>
+              <Grid>
+                <Link href={"/contact"} className="hover:text-blue-800">
+                  Contact
+                </Link>
+              </Grid>
+              <Grid>
+                <Link href={"/blog"} className="hover:text-blue-800">
+                  Blog
+                </Link>
+              </Grid>
+              <Grid className="border border-darkApp-background h-9"></Grid>
+            </>
+          )}
+          <Grid>
+            {token ? (
+              <Button
+                variant="contained"
+                className="bg-app-primary hover:bg-slate-500"
+                onClick={() => {
+                  sessionStorage.removeItem("token");
+                  setToken("");
+                  router.push("/");
+                }}
+              >
+                logout
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                className="bg-app-primary hover:bg-slate-500"
+                onClick={() => router.push("/login")}
+              >
+                Login
+              </Button>
+            )}
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
