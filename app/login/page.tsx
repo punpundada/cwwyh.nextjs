@@ -4,13 +4,15 @@ import { ILoginProp } from "@/types/ILogin";
 import InputController from "@/components/muiControllers/InputController";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Button, Paper } from "@mui/material";
+import { Button, Grid, Paper, useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useLoginData } from "@/hooks/UseLoginData";
-
+import { useTheme } from "@mui/material";
 
 const LoginPage = () => {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.up("sm"));
   const schema = yup.object({
     email: yup
       .string()
@@ -21,10 +23,7 @@ const LoginPage = () => {
 
   const router = useRouter();
 
-  const {
-    control,
-    handleSubmit,
-  } = useForm<ILoginProp>({
+  const { control, handleSubmit } = useForm<ILoginProp>({
     defaultValues: {
       email: "",
       password: "",
@@ -32,60 +31,76 @@ const LoginPage = () => {
     resolver: yupResolver(schema),
   });
 
-  const { isLoading,mutateAsync } = useLoginData();
-  const SubmitHandler = async(formData: ILoginProp) => {
+  const { isLoading, mutateAsync } = useLoginData();
+  const SubmitHandler = async (formData: ILoginProp) => {
     try {
-       await mutateAsync(formData);
+      await mutateAsync(formData);
       router.push("/recipe");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   return (
-    <div className="bg-app-primary h-full text-app-text flex justify-center items-center  ">
-      <form
-        className="w-screen h-screen flex justify-center items-center"
-        onSubmit={handleSubmit(SubmitHandler)}
+    <Grid
+      container
+      justifyContent={"center"}
+      alignItems={"center"}
+      height={"92vh"}
+    >
+      {isSmall && (
+        <Grid
+          item
+          container
+          justifyContent={"center"}
+          alignItems={"center"}
+          md={6}
+          height={"100%"}
+        >
+          Image
+        </Grid>
+      )}
+      <Grid
+        item
+        container
+        justifyContent={"center"}
+        alignItems={"center"}
+        xs={12}
+        sm={12}
+        md={6}
+        height={"100%"}
       >
-        <Paper className="w-1/3 h-3/5">
-          {/* <p >From Pantry to Plate: Cook with What You Have  – <br/>The Home of Effortless Cooking Inspiration.</p> */}
-          <div className="p-20 flex flex-col">
-            <p className="font-semibold">Login</p>
-            <div className="flex flex-col gap-4">
+        <Paper elevation={3} className="h-2/3 w-2/3">
+          <Grid
+            container
+            direction={"column"}
+            spacing={2}
+            padding={4}
+            marginTop={4}
+            component={'form'}
+            onSubmit={handleSubmit(SubmitHandler)}
+          >
+            <Grid item>Login</Grid>
+            <Grid item>
               <InputController control={control} name="email" label="Email" />
-
+            </Grid>
+            <Grid item>
               <InputController
                 control={control}
                 name={"password"}
                 label="Password"
                 type="password"
               />
-            </div>
-            <div className="flex relative justify-end">
-              <Button
-                color="primary"
-                type="submit"
-                variant="contained"
-                disabled={isLoading}
-              >
+            </Grid>
+            <Grid item container justifyContent={"end"} alignItems={"center"}>
+              <Button type="submit" variant="outlined" disabled={isLoading}>
                 Login
               </Button>
-            </div>
-            <h6>
-              Do not have an account?
-              <Link
-                href={"/signup"}
-                className="text-app-accent hover:text-app-primary"
-              >
-                {" "}
-                Signup
-              </Link>
-            </h6>
-          </div>
+            </Grid>
+          </Grid>
         </Paper>
-      </form>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 

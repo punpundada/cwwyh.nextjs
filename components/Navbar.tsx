@@ -15,19 +15,19 @@ import {
   useTheme,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import useToken from "@/services/TokenProvider";
 import MenuIcon from "@mui/icons-material/Menu";
 import { navLinks } from "@/json/navbarItems";
+import TokenProvider from "@/services/TokenProvider";
 
 const Navbar = () => {
   const theme = useTheme();
   const router = useRouter();
-  const [token, setToken] = useState<null | string>(null);
+  const [token, setToken] = useState<null | string>(TokenProvider());
   const [openDrawer, setOpenDrawer] = useState(false);
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
-    setToken(useToken);
+    setToken(TokenProvider());
   }, []);
 
   return (
