@@ -1,24 +1,28 @@
-"use client"
-import { UseAllRecipeData } from "@/hooks/recipe/UseAllRecipeData"
+"use client";
+import RecipeCard from "@/components/RecipeCard";
+import { UseAllRecipeData } from "@/hooks/recipe/UseAllRecipeData";
+import { Grid } from "@mui/material";
 
 const page = () => {
-  const {data , isError , isLoading} = UseAllRecipeData()
+  const { data, isError, isLoading } = UseAllRecipeData();
   return (
-    <div className='h-screen'>
-       <div className='h-1/4'>
-        {
-          isLoading ? <h4>Loading....</h4>:
-          <ul>
-            {
-              data?.data.data.recipes.map((recipe)=>(
-                <li key={recipe._id} >{recipe.recipeName}</li> 
-              ))
-            }
-          </ul>
-        }
-       </div>
-    </div>
-  )
-}
+    <Grid container direction={"row"}>
+      <Grid item xs={9}>
+        <Grid container direction={"column"} gap={4}>
+          <Grid item bgcolor={"aqua"}>Search</Grid>
+          <Grid item bgcolor={"bisque"} className="flex justify-center">
+            <RecipeCard />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item xs={3}>
+        <Grid container direction={"column"} gap={4}>
+          <Grid item bgcolor={"olive"}>USER CARD</Grid>
+          <Grid item bgcolor={"tomato"}>i like to try</Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+};
 
-export default page
+export default page;
