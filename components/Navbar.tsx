@@ -22,7 +22,7 @@ import TokenProvider from "@/services/TokenProvider";
 const Navbar = () => {
   const theme = useTheme();
   const router = useRouter();
-  const [token, setToken] = useState<null | string>(TokenProvider());
+  const [token, setToken] = useState<null | string>();
   const [openDrawer, setOpenDrawer] = useState(false);
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
