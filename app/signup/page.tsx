@@ -10,28 +10,27 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useSignupData } from "@/hooks/auth/useSignupData";
 
 
 
 const SignupPage = () => {
-  const[loading , setLoading]=useState(false);
   const router = useRouter();
-
+  const {isLoading , mutateAsync ,data:result} = useSignupData()
   const sumbitHandler = async (data: ISignup) => {
-    setLoading(true);
     try {
-      debugger
-      const result: IResponce = await SignupService.signup(data);
-      if (result.isSuccess) {
-        toast.success(result.data.message);
+      // const result: IResponce = await SignupService.signup(data);
+      
+      await mutateAsync(data)
+      if (result?.data.isSuccess) {
+        toast.success(result.data.data.message);
         router.push("/login");
       } else {
-        toast.error(result.data.message);
+        toast.error(result?.data.data.message);
       }
     } catch (error: any) {
       toast.error(error?.message);
     }
-    setLoading(false);
   };
 
   const schema = yup.object({
@@ -77,7 +76,7 @@ const SignupPage = () => {
           />
           <InputController control={control} label="Email" name="email" />
           <InputController control={control} label="Password" name="password"/>
-          <Button variant="contained" type="submit" onClick={handleSubmit(sumbitHandler)} disabled={loading} >
+          <Button variant="contained" type="submit" onClick={handleSubmit(sumbitHandler)} >
             Sign up
           </Button>
         </Paper>
