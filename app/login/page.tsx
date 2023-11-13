@@ -7,8 +7,9 @@ import * as yup from "yup";
 import { Button, Grid, Paper, useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useLoginData } from "@/hooks/UseLoginData";
+import { useLoginData } from "@/hooks/auth/UseLoginData";
 import { useTheme } from "@mui/material";
+import Loader from "@/components/Loader";
 
 const LoginPage = () => {
   const theme = useTheme();
@@ -40,6 +41,10 @@ const LoginPage = () => {
       console.log(error);
     }
   };
+
+  if(isLoading){
+    return <Loader isLoading={isLoading} />
+  }
 
   return (
     <Grid

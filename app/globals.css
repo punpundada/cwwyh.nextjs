@@ -5,3 +5,8 @@
 .logo{
     transform:  scale(0.55%);
 }
+.bgimage{
+    background-image: url('https://images.unsplash.com/photo-1471478108131-9b2335c21611?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjAwfHwxNiUyMCo5JTIwZm9vZCUyMGltYWdlc3xlbnwwfDB8MHx8fDI%3D&auto=format&fit=crop&w=600&q=60');
+    object-fit: cover;
+    background-repeat: no-repeat;
+}

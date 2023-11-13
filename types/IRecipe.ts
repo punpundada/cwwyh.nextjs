@@ -4,11 +4,9 @@ export interface IRecipe {
   userId: string;
   ingredientsList: IngredientsList[];
   prepTime: string;
+  description:string;
   difficultyLevel: string;
   imgUrls: ImgUrl[];
-  createdAt: Date;
-  updatedAt: Date;
-  __v: number;
 }
 
 interface IngredientsList {
