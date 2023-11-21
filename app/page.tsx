@@ -14,13 +14,13 @@ import Signup from "@/components/auth/Signup";
 import signupSideImage from '@/images/WebsiteImages/pexels-jonathan-meyer-752503.jpg'
 
 import type { Metadata } from "next";
-export const metadata:Metadata={
-  title:{
-    // absolute:'',
-    default:'CWWYH',
-    template:'%s | Home'
-  }
-}
+// export const metadata:Metadata={
+//   title:{
+//     // absolute:'',
+//     default:'CWWYH',
+//     template:'%s | Home'
+//   }
+// }
 
 export default function Home() {
   const theme = useTheme();
