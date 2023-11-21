@@ -9,8 +9,12 @@ import img4 from "@/images/home-Page/kabir-cheema-8T9AVksyt7s-unsplash.jpg";
 import imgp2 from "@/images/home-Page/page2/stefan-vladimirov-Q_Moi2xjieU-unsplash.jpg";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-
+import { Grid, useMediaQuery, useTheme } from "@mui/material";
+import Signup from "@/components/auth/Signup";
+import signupSideImage from '@/images/WebsiteImages/pexels-jonathan-meyer-752503.jpg'
 export default function Home() {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const router = useRouter();
   gsap.registerPlugin(ScrollTrigger);
 
@@ -87,9 +91,7 @@ export default function Home() {
               onClick={() => router.push("/recipe")}
               className="z-30 absolute top-[40%] left-[13%] "
             >
-              <button
-                className="h-24 w-80 rounded-[2rem] bg-white text-2xl text-center font-bold text-black"
-              >
+              <button className="h-24 w-80 rounded-[2rem] bg-white text-2xl text-center font-bold text-black">
                 Search Recipe
               </button>
             </div>
@@ -111,7 +113,38 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="page2 snap-start  w-full h-screen bg-app-primary flex">
+        <div className="snap-start snap-mandatory snap-always w-full h-screen bg-[#2596be] back" style={{backgroundImage:`url(${signupSideImage.src})`,backgroundSize:'cover'}}>
+          <Grid container className="h-full pt-6">
+            {isSmall && (
+              <Grid
+                container
+                item
+                xs={0}
+                sm={0}
+                md={8}
+                justifyContent={"center"}
+                className="relative"
+              >
+                {/* <Image src={signupSideImage} fill objectFit="cover" alt='Image' /> */}  
+              </Grid>
+            )}
+            <Grid
+              container
+              item
+              xs={12}
+              sm={12}
+              md={4}
+              justifyContent={"center"}
+              className="h-full"
+            >
+              <Grid item xs={11} sm={11} md={11}>
+                <Signup />
+              </Grid>
+            </Grid>
+          </Grid>
+        </div>
+
+        <div className="page2 snap-start snap-mandatory snap-always  w-full h-screen bg-app-primary flex">
           <div className="w-[45%] flex flex-col justify-center items-center text-gray-800">
             <h1 className="text-7xl font-extrabold text-center">
               Save Recipes you like
@@ -130,7 +163,7 @@ export default function Home() {
             />
           </div>
         </div>
-        {/* <div className="snap-start  w-full h-screen bg-[#2596be]">Page 3</div> */}
+
       </main>
     </>
   );
