@@ -23,14 +23,17 @@ const RecipeCard = ({ description, imageUrl, name , id}: IRecipeCardProp) => {
           lg={6}
           // bgcolor={"ActiveBorder"}
           height={isSmall ? "60%" : "100%"}
-          className="flex justify-center items-center overflow-hidden bg-app-secondary"
+          className="flex justify-center items-center overflow-hidden bg-app-secondary relative"
         >
           <Image
             src={imageUrl}
             alt="Food Image"
-            height={200}
-            width={300}
-            className="object-cover"
+            fill
+            objectFit="cover"
+            quality={76}
+            // height={200}
+            // width={300}
+            // className="object-cover"
           />
         </Grid>
         <Grid
