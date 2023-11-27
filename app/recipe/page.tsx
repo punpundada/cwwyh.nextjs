@@ -3,7 +3,6 @@ import Loader from "@/components/Loader";
 import RecipeCard from "@/components/RecipeCard";
 import { UseAllRecipeData } from "@/hooks/recipe/UseAllRecipeData";
 import { Button, Grid, Paper } from "@mui/material";
-import { url } from "inspector";
 import { useEffect } from "react";
 let imagLink =
   "https://images.unsplash.com/photo-1471478108131-9b2335c21611?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjAwfHwxNiUyMCo5JTIwZm9vZCUyMGltYWdlc3xlbnwwfDB8MHx8fDI%3D&auto=format&fit=crop&w=600&q=60";
@@ -50,5 +49,6 @@ const RecipePage = () => {
     </Grid>
   );
 };
+
 
 export default RecipePage;
