@@ -15,7 +15,7 @@ const RecipePage = async ({
   const {
     data: { recipes },
     isSuccess,
-  } = await getAllRecipeService(page, search === "" && search ===undefined ? undefined : search);
+  } = await getAllRecipeService(page, (search === "" && search ===undefined) ? undefined : search);
   return (
     <Grid container className="w-screen justify-around">
         <Grid

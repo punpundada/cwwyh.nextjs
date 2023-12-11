@@ -5,7 +5,7 @@ import React from "react";
 
 const Recipelauout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Grid container justifyContent={"center"}>
+    <Grid container justifyContent={"center"} spacing={2}>
       <Grid item xs={12} sm={12} md={10} container>{children}</Grid>
       <Grid
         item
