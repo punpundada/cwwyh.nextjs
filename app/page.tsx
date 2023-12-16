@@ -9,22 +9,20 @@ import signupSideImage from "@/images/WebsiteImages/pexels-jonathan-meyer-752503
 import type { Metadata } from "next";
 import SearchRecipeButton from "./utils/ui/home/SearchRecipeButton";
 import MidPage from "./utils/ui/home/midPage";
+import { cache } from "react";
+import getAllRecipeService from "@/services/recipeService/getAllRecipeService";
 
 
 export const metadata:Metadata={
   title:{
-    absolute:'',
+    template:'%s | CWWYH',
     default:'CWWYH',
-    template:'%s | Home'
   }
 }
 
 export default async function Home() {
-  // const baseUrl = process.env.NEXT_PUBLIC_BASE_URL 
-  //   const data =  await fetch(`${baseUrl}/recipe/get`,{
-  //       method:'GET'
-  //     })
 
+  getAllRecipeService(0,undefined)
   return (
     <>
       <main className="snap-y snap-mandatory snap-always overflow-y-scroll bg-app-background h-screen relative">
