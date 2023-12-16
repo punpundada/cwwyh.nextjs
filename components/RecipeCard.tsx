@@ -28,16 +28,16 @@ const RecipeCard = ({ description, imageUrl, name, id }: IRecipeCardProp) => {
           alt="green iguana"
           className="h-44"
         />
-        <CardContent className="bg-app-primary">
+        <CardContent className="bg-slate-300">
           <Typography gutterBottom variant="h5" component="div">
             {name}
           </Typography>
-          <Typography variant="body2" color="text.secondary" className="h-10">
+          <Typography variant="body2" color="text.secondary" className="h">
             {shortDesc}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions className="bg-app-secondary">
+      <CardActions className="bg-slate-300">
         <Button size="small" color="primary">
           Share
         </Button>

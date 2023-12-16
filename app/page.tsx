@@ -15,9 +15,8 @@ import getAllRecipeService from "@/services/recipeService/getAllRecipeService";
 
 export const metadata:Metadata={
   title:{
-    absolute:'',
+    template:'%s | CWWYH',
     default:'CWWYH',
-    template:'%s | Home'
   }
 }
 

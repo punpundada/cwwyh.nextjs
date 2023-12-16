@@ -1,7 +1,19 @@
 "use client"
 import Loader from '@/components/Loader'
 import { UseRecipeById } from '@/hooks/recipe/UseRecipeById'
+import { Metadata } from 'next'
 import React from 'react'
+
+export async  function generateMetadata({ params }: { params: { id: string }}):Promise<Metadata>{
+
+  const metadata:Metadata ={
+    title:{
+      template:`%s | ${params.id}`,
+      default:`${params.id}`
+    }
+  } 
+  return  metadata;
+}
 
 const RecipeById = ({ params }: { params: { id: string }}) => {
   // console.log(params)

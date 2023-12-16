@@ -1,8 +1,16 @@
 import RecipeCard from "@/components/RecipeCard";
-import RecipeSearch from "@/components/ui/RecipeSearch";
 import getAllRecipeService from "@/services/recipeService/getAllRecipeService";
-import { Grid, Paper } from "@mui/material";
-import { Suspense } from "react";
+import { Grid } from "@mui/material";
+import { Metadata } from "next/types";
+
+
+export const metadata:Metadata={
+  title:{
+    default:'Recipes',
+    template:'%s | Recipes',
+  }
+}
+
 const RecipePage = async ({
   searchParams,
 }: {
