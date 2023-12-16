@@ -7,6 +7,10 @@ export interface IRecipe {
   description:string;
   difficultyLevel: string;
   imgUrls: ImgUrl[];
+  steps:IStep[]
+}
+interface IStep {
+  step: string;
 }
 
 interface IngredientsList {
